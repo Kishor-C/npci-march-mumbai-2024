@@ -19,13 +19,16 @@ class TicketBooking implements AdminUser, RegularUser {
 public class TestAbstraction {
 	// create main method that acts like 2 developers code to call book & modify
 	public static void main(String[] args) {
-		TicketBooking tb = new TicketBooking(); // this object is shared to the developers
-		// Developer-1 code
-		RegularUser regular = tb;
+		// below code is tightly coupled
+		//TicketBooking tb = new TicketBooking(); // this object is shared to the developers
+		
+		
+		// Developer-1 code - loosely coupled
+		RegularUser regular = ObjectFactory.getInstance();
 		regular.book();
-		// Developer-2 code
+		// Developer-2 code - loosely coupled
 		System.out.println("----------------------");
-		AdminUser admin = tb;
+		AdminUser admin = (AdminUser)ObjectFactory.getInstance();
 		admin.book();
 		admin.modify();
 		
